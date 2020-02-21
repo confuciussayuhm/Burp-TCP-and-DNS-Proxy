@@ -122,6 +122,6 @@
   	 	<version>5.0.1.Final</version>
   	 </dependency>
 	  </dependencies>
-  <name>NonHttp Burp Extension</name>
-  <url>http://github.com/summitt/</url>
+  <name>TCP and DNS Burp Extension</name>
+  <url>http://github.com/confuciussayuhm/</url>
 </project>

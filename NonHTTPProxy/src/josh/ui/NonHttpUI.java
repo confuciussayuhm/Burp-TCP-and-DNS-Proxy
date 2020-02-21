@@ -2184,21 +2184,21 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 		gbl_About.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		About.setLayout(gbl_About);
 		
-		JLabel lblNopeProxy = new JLabel("NOn Http Protocol Extending (NoPE) Proxy");
+		JLabel lblNopeProxy = new JLabel("TCP and DNS Proxy");
 		GridBagConstraints gbc_lblNopeProxy = new GridBagConstraints();
 		gbc_lblNopeProxy.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNopeProxy.gridx = 1;
 		gbc_lblNopeProxy.gridy = 1;
 		About.add(lblNopeProxy, gbc_lblNopeProxy);
 		
-		JLabel lblVersion = new JLabel("Version 1.5.2");
+		JLabel lblVersion = new JLabel("Version 2.0.0");
 		GridBagConstraints gbc_lblVersion = new GridBagConstraints();
 		gbc_lblVersion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblVersion.gridx = 1;
 		gbc_lblVersion.gridy = 2;
 		About.add(lblVersion, gbc_lblVersion);
 		
-		JLabel lblDevelopedByJosh = new JLabel("Developed By: Josh Summitt - @null0perat0r - josh.summitt@fusesoft.co");
+		JLabel lblDevelopedByJosh = new JLabel("Maintained by @uhm_say");
 		lblDevelopedByJosh.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -2210,7 +2210,7 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 			@Override
 			public void mousePressed(MouseEvent evt) {
 				try {
-					Desktop.getDesktop().browse(new URI("https://twitter.com/null0perat0r"));
+					Desktop.getDesktop().browse(new URI("https://twitter.com/uhm_say"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -2245,13 +2245,13 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 		gbc_lblDevelopedByJosh.gridy = 4;
 		About.add(lblDevelopedByJosh, gbc_lblDevelopedByJosh);
 		
-		JButton btnHttpgithubcomsummitt = new JButton("https://github.com/summitt");
+		JButton btnHttpgithubcomsummitt = new JButton("https://github.com/confuciussayuhm");
 		Icon ghicon = IconFontSwing.buildIcon(Elusive.GITHUB, 23);
 		btnHttpgithubcomsummitt.setIcon(ghicon);
 		btnHttpgithubcomsummitt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Desktop.getDesktop().browse(new URI("https://github.com/summitt"));
+					Desktop.getDesktop().browse(new URI("https://github.com/confuciussayuhm"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
