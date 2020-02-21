@@ -1,12 +1,7 @@
-<img align="right" src="http://www.reactiongifs.com/wp-content/uploads/2013/02/nope.gif"/>
-
-# NoPE Proxy
-*Formerly known as 'Burp-Non-HTTP-Extension'*
+# TaD Proxy
+*Fork of 'Burp-Non-HTTP-Extension'*
 <br>
-## [Download latest release here](https://github.com/summitt/Burp-Non-HTTP-Extension/releases)
-## [Manual and Guides here](https://github.com/summitt/Burp-Non-HTTP-Extension/wiki)
-## [Join Our Build-Break Slack to ask questions](https://buildbreak.herokuapp.com/)
-*Contact: @null0perat0r*
+*Contact: uhm_say*
 <br>
 <br>
 
