@@ -251,7 +251,7 @@ public class UDPListener implements Runnable{
             String returnIP = this.ADDRESS[0] + "." + this.ADDRESS[1] + "." +this.ADDRESS[2] + "." +this.ADDRESS[3];
             for(String line : hosts){
             	if(line.contains(hostname) && !line.startsWith("#")){
-            		String hostIP = line.split(" ")[0];
+            		String hostIP = line.split("(\\s+|\\t+)")[0];
             		if(hostIP.matches("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}")){
             			returnIP = hostIP;
             			String [] hostIPOcts = hostIP.split("\\.");
