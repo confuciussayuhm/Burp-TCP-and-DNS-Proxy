@@ -2,8 +2,8 @@ package josh.utils.events;
 
 import java.util.EventObject;
 
-public class PythonOutputEvent extends EventObject  {
-	
+public class PythonOutputEvent extends EventObject {
+
 	private String Message;
 	private String Error;
 	private String Direction;
@@ -35,11 +35,4 @@ public class PythonOutputEvent extends EventObject  {
 	public void setDirection(String direction) {
 		Direction = direction;
 	}
-	
-	
-
-	
-	
-	
-
 }

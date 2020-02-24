@@ -6,8 +6,8 @@ import java.io.InputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class ProxyClient implements Runnable{
-	
+public class ProxyClient implements Runnable {
+
 	private String IP;
 	private int Port;
 	private byte[] Data;
@@ -15,26 +15,25 @@ public class ProxyClient implements Runnable{
 	@Override
 	public void run() {
 		System.out.println("New CLient");
-		Socket clientSocket= null;;
+		Socket clientSocket = null;
+		;
 		try {
 			clientSocket = new Socket(this.IP, this.Port);
-		
+
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			InputStream inFromServer = clientSocket.getInputStream();
 			outToServer.write(this.Data, 0, this.Data.length);
 			byte[] buffer = new byte[1024];
-			int read=0;
+			int read = 0;
 			while ((read = inFromServer.read(buffer)) != -1) {
-				System.out.println(""+read);
+				System.out.println("" + read);
 				byte[] buff = new byte[read];
-				
-				for(int i=0; i<read;i++)
-					buff[i]=buffer[i];
-	
-				
+
+				for (int i = 0; i < read; i++)
+					buff[i] = buffer[i];
 			}
-			//ToDO: fire Event
-	
+			// ToDO: fire Event
+
 			clientSocket.close();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -42,8 +41,8 @@ public class ProxyClient implements Runnable{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			if(clientSocket != null)
+		} finally {
+			if (clientSocket != null)
 				try {
 					clientSocket.close();
 				} catch (IOException e) {
@@ -51,18 +50,17 @@ public class ProxyClient implements Runnable{
 					e.printStackTrace();
 				}
 		}
-		
-	}
-	
-	public void setPort(int port){
-		this.Port=port;
-	}
-	public void setIP(String IP){
-		this.IP=IP;
-	}
-	
-	public void setData(byte [] Data){
-		this.Data=Data;
 	}
 
+	public void setPort(int port) {
+		this.Port = port;
+	}
+
+	public void setIP(String IP) {
+		this.IP = IP;
+	}
+
+	public void setData(byte[] Data) {
+		this.Data = Data;
+	}
 }

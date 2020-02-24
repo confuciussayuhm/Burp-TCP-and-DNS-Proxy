@@ -8,57 +8,55 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "requests")
 public class Requests {
-	 @Id
-	 @Column(name = "id")
-	 @GeneratedValue
+	@Id
+	@Column(name = "id")
+	@GeneratedValue
 	private int id;
-	 @Column(name = "alt_id")
-	private int alt_id; 
-	 @Column(name = "data")
+	@Column(name = "alt_id")
+	private int alt_id;
+	@Column(name = "data")
 	private String data;
-	 @Column(name = "original")
+	@Column(name = "original")
 	private String original;
-	 @Column(name = "srcip")
+	@Column(name = "srcip")
 	private String srcIp;
-	 @Column(name = "dstip")
+	@Column(name = "dstip")
 	private String dstIp;
-	 @Column(name = "bytes")
+	@Column(name = "bytes")
 	private int bytes;
-	 @Column(name = "srcport")
+	@Column(name = "srcport")
 	private int srcPort;
-	 @Column(name = "dstport")
+	@Column(name = "dstport")
 	private int dstPort;
-	 @Column(name = "date")
+	@Column(name = "date")
 	private Long date;
-	 @Column(name = "direction")
+	@Column(name = "direction")
 	private String direction;
-	 @Column(name = "data_str")
+	@Column(name = "data_str")
 	private String data_str;
-	 @Column(name = "original_str")
+	@Column(name = "original_str")
 	private String original_str;
-	
-	 
-    public Requests(){};
-	 
-	public Requests(int Index, byte[] requestResponse, byte[] original, String SrcIp,int SrcPort, String DstIP, int DstPort, String Direction, Long time, int bytes){
+
+	public Requests() {
+	};
+
+	public Requests(int Index, byte[] requestResponse, byte[] original, String SrcIp, int SrcPort, String DstIP,
+			int DstPort, String Direction, Long time, int bytes) {
 		this.alt_id = Index;
 		this.data = Base64.getEncoder().encodeToString(requestResponse);
-		this.original =  Base64.getEncoder().encodeToString(original);
+		this.original = Base64.getEncoder().encodeToString(original);
 		this.srcIp = SrcIp;
-		this.srcPort =  SrcPort;
+		this.srcPort = SrcPort;
 		this.dstIp = DstIP;
-		this.dstPort =  DstPort;
+		this.dstPort = DstPort;
 		this.direction = Direction;
 		this.date = time;
 		this.bytes = bytes;
 		this.original_str = new String(original).replaceAll("[^a-zA-Z0-9~!@#$%^&*()_+`\\-=,./<>?\\s]", "");
 		this.data_str = new String(requestResponse).replaceAll("[^a-zA-Z0-9~!@#$%^&*()_+`\\-=,./<>?\\s]", "");
-		
-		
 	}
 
 	public int getId() {
@@ -70,15 +68,14 @@ public class Requests {
 	}
 
 	public byte[] getData() {
-		if(data == null)
+		if (data == null)
 			return null;
 		else
 			return Base64.getDecoder().decode(data);
-		
 	}
 
 	public byte[] getOriginal() {
-		if(original == null)
+		if (original == null)
 			return null;
 		else
 			return Base64.getDecoder().decode(original);
@@ -171,12 +168,4 @@ public class Requests {
 	public void setOriginal_str(String original_str) {
 		this.original_str = original_str;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }

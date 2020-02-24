@@ -2,8 +2,7 @@ package josh.utils.events;
 
 import java.util.EventObject;
 
-public class SendClosedEvent extends EventObject  {
-	
+public class SendClosedEvent extends EventObject {
 
 	private String direction;
 
@@ -18,9 +17,4 @@ public class SendClosedEvent extends EventObject  {
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
-
-
-	
-	
-
 }

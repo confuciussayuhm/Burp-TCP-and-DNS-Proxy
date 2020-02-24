@@ -26,175 +26,124 @@ import josh.utils.events.UDPEventListener;
 import josh.dnsspoof.UDPListener;
 import burp.*;
 
+public class BurpExtender implements IBurpExtender, ITab, IContextMenuFactory {
+	private NonHttpUI dnsConfig;
+	private UDPListener list;
+	public IBurpExtenderCallbacks mCallbacks;
+	private IExtensionHelpers helpers;
+	private Thread ListThread = null;
+	private SharedBoolean sb = new SharedBoolean();
 
+	@Override
+	public void registerExtenderCallbacks(IBurpExtenderCallbacks callbacks) {
+		mCallbacks = callbacks;
+		helpers = mCallbacks.getHelpers();
+		mCallbacks.setExtensionName("NoPE Proxy");
+		mCallbacks.registerContextMenuFactory(this);
 
+		// create our UI
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
 
+				dnsConfig = new NonHttpUI(mCallbacks, helpers, sb);
 
-
-	public class BurpExtender implements IBurpExtender, ITab, IContextMenuFactory
-	{
-	    private NonHttpUI dnsConfig; 
-		private UDPListener list; 
-		public IBurpExtenderCallbacks mCallbacks;
-		private IExtensionHelpers helpers;
-		private Thread ListThread = null;
-		private SharedBoolean sb = new SharedBoolean();
-
-
-		@Override
-	    public void registerExtenderCallbacks(IBurpExtenderCallbacks callbacks)
-	    {
-	        mCallbacks = callbacks;
-			helpers = mCallbacks.getHelpers();
-			mCallbacks.setExtensionName("NoPE Proxy");
-			mCallbacks.registerContextMenuFactory(this);
-			
-			
-			
-			
-			
-			
-			 // create our UI
-	       SwingUtilities.invokeLater(new Runnable() 
-	        {
-	    	  
-
-				@Override
-				public void run() {
-						
-					 	dnsConfig = new NonHttpUI(mCallbacks, helpers, sb);
-					 
-
-						if(dnsConfig.DNSIP != null &&  !dnsConfig.equals("")){
-							list.ADDRESS = dnsConfig.DNSIP.split("\\.");
-						}
-						
-						list= new UDPListener(Integer.parseInt(dnsConfig.getTxtDNSPort().getText()), sb);
-						list.Callbacks = mCallbacks;
-					
-						list.addEventListener(new UDPEventListener(){
-
-							@Override
-							public void UDPDown(DNSEvent e) {
-								
-								mCallbacks.issueAlert("DNSMiTM: DNS Server Stopped.");
-								dnsConfig.DNSStopped();
-							}
-							
-						});
-						
-						list.addTableEventListener( dnsConfig);
-						
-						
-						dnsConfig.addEventListener( new DNSConfigListener(){
-
-							@Override
-							public void DNSToggle(DNSEvent e) {
-								if(!dnsConfig.isDNSRunning){
-									mCallbacks.printOutput("Starting DNS Server");
-									/*if(dnsConfig.DNSIP != null && !dnsConfig.equals(""))
-										list.ADDRESS = dnsConfig.DNSIP.split("\\.");
-									list.setPort(Integer.parseInt(dnsConfig.getTxtDNSPort().getText()));*/
-									if(e.getAddress()!= null && !e.getAddress().equals(""))
-										list.ADDRESS = e.getAddress().split("\\.");
-									list.setPort(e.getPort());
-									
-									ListThread = new Thread(list);
-									ListThread.start();
-							        mCallbacks.issueAlert("DNSMiTM: DNS Server Started.");
-								}else{
-									ListThread.interrupt();
-									list.StopServer();
-									mCallbacks.issueAlert("DNSMiTM: DNS is Shutting Down");
-								}
-							}
-								
-						});
-						
-
-				        
-
-				        
-				        if(dnsConfig.getAutoStart()){
-				        	ListThread = new Thread(list);
-				        	ListThread.start();
-					        mCallbacks.issueAlert("DNSMiTM: DNS Server Started.");
-						}
-						mCallbacks.customizeUiComponent(dnsConfig);
-		                mCallbacks.addSuiteTab(BurpExtender.this);
-		                
-		                
-					
+				if (dnsConfig.DNSIP != null && !dnsConfig.equals("")) {
+					list.ADDRESS = dnsConfig.DNSIP.split("\\.");
 				}
-	        
-	        });
-			
-			
-	       
-	    }
-	    
 
-	  
+				list = new UDPListener(Integer.parseInt(dnsConfig.getTxtDNSPort().getText()), sb);
+				list.Callbacks = mCallbacks;
 
-		@Override
-		public String getTabCaption() {
-			
-			return "NoPE Proxy";
-		}
-
-
-
-		@Override
-		public Component getUiComponent() {
-			
-			return dnsConfig;
-		}
-
-		
-		private boolean shouldShow(){
-			if(dnsConfig.ntbm.requestViewer.getComponent().isShowing() ||
-				dnsConfig.ntbm.originalViewer.getComponent().isShowing() ||
-				dnsConfig.intbm.requestViewer.getComponent().isShowing()){
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-		@Override
-		public List<JMenuItem> createMenuItems(IContextMenuInvocation inv) {
-			List<JMenuItem> nopes = new ArrayList<JMenuItem>();
-			if(shouldShow()){
-				JMenuItem send2repeater = new JMenuItem("Send to NoPE Repeater");
-				send2repeater.addActionListener(new ActionListener(){
+				list.addEventListener(new UDPEventListener() {
 					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						byte [] message;
-						if(dnsConfig.ntbm.requestViewer.getComponent().isShowing())
-							message= dnsConfig.ntbm.requestViewer.getMessage();
-						else if(dnsConfig.ntbm.originalViewer.getComponent().isShowing())
-							message= dnsConfig.ntbm.originalViewer.getMessage();
-						else if(dnsConfig.intbm.requestViewer.getComponent().isShowing())
-							message= dnsConfig.intbm.requestViewer.getMessage();
-						else
-							return;
-						
-						dnsConfig.repeater.setMessage(message, true);
-						
-						
+					public void UDPDown(DNSEvent e) {
+						mCallbacks.issueAlert("DNSMiTM: DNS Server Stopped.");
+						dnsConfig.DNSStopped();
 					}
-					
 				});
-				nopes.add(send2repeater);
+
+				list.addTableEventListener(dnsConfig);
+
+				dnsConfig.addEventListener(new DNSConfigListener() {
+
+					@Override
+					public void DNSToggle(DNSEvent e) {
+						if (!dnsConfig.isDNSRunning) {
+							mCallbacks.printOutput("Starting DNS Server");
+							/*
+							 * if(dnsConfig.DNSIP != null && !dnsConfig.equals("")) list.ADDRESS =
+							 * dnsConfig.DNSIP.split("\\.");
+							 * list.setPort(Integer.parseInt(dnsConfig.getTxtDNSPort().getText()));
+							 */
+							if (e.getAddress() != null && !e.getAddress().equals(""))
+								list.ADDRESS = e.getAddress().split("\\.");
+							list.setPort(e.getPort());
+
+							ListThread = new Thread(list);
+							ListThread.start();
+							mCallbacks.issueAlert("DNSMiTM: DNS Server Started.");
+						} else {
+							ListThread.interrupt();
+							list.StopServer();
+							mCallbacks.issueAlert("DNSMiTM: DNS is Shutting Down");
+						}
+					}
+				});
+
+				if (dnsConfig.getAutoStart()) {
+					ListThread = new Thread(list);
+					ListThread.start();
+					mCallbacks.issueAlert("DNSMiTM: DNS Server Started.");
+				}
+				mCallbacks.customizeUiComponent(dnsConfig);
+				mCallbacks.addSuiteTab(BurpExtender.this);
 			}
-			return nopes;
-		}
-
-
-		
+		});
 	}
-	
-	
-	
-	
 
+	@Override
+	public String getTabCaption() {
+		return "TaD Proxy";
+	}
+
+	@Override
+	public Component getUiComponent() {
+		return dnsConfig;
+	}
+
+	private boolean shouldShow() {
+		if (dnsConfig.ntbm.requestViewer.getComponent().isShowing()
+				|| dnsConfig.ntbm.originalViewer.getComponent().isShowing()
+				|| dnsConfig.intbm.requestViewer.getComponent().isShowing()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public List<JMenuItem> createMenuItems(IContextMenuInvocation inv) {
+		List<JMenuItem> nopes = new ArrayList<JMenuItem>();
+		if (shouldShow()) {
+			JMenuItem send2repeater = new JMenuItem("Send to TaD Repeater");
+			send2repeater.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					byte[] message;
+					if (dnsConfig.ntbm.requestViewer.getComponent().isShowing())
+						message = dnsConfig.ntbm.requestViewer.getMessage();
+					else if (dnsConfig.ntbm.originalViewer.getComponent().isShowing())
+						message = dnsConfig.ntbm.originalViewer.getMessage();
+					else if (dnsConfig.intbm.requestViewer.getComponent().isShowing())
+						message = dnsConfig.intbm.requestViewer.getMessage();
+					else
+						return;
+					dnsConfig.repeater.setMessage(message, true);
+				}
+			});
+			nopes.add(send2repeater);
+		}
+		return nopes;
+	}
+}

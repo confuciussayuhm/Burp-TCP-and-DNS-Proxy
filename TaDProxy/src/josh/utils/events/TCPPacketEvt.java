@@ -2,8 +2,8 @@ package josh.utils.events;
 
 import java.util.EventObject;
 
-public class TCPPacketEvt extends EventObject  {
-	
+public class TCPPacketEvt extends EventObject {
+
 	private String sip;
 	private int dport;
 	private String Service;
@@ -48,7 +48,4 @@ public class TCPPacketEvt extends EventObject  {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	
-	
-
 }

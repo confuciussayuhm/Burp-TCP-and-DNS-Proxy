@@ -2,8 +2,8 @@ package josh.utils.events;
 
 import java.util.EventObject;
 
-public class DNSEvent extends EventObject  {
-	
+public class DNSEvent extends EventObject {
+
 	private int port;
 	private String address;
 
@@ -26,7 +26,4 @@ public class DNSEvent extends EventObject  {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
-
 }

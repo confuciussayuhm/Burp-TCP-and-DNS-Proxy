@@ -20,21 +20,23 @@ public class ProxyEvent extends EventObject {
 	public ProxyEvent(Object arg0) {
 		super(arg0);
 	}
-	
-	public byte[] getData(){
+
+	public byte[] getData() {
 		return Data;
 	}
-	
-	public void setData(byte [] Data){
-		this.Data=Data;
+
+	public void setData(byte[] Data) {
+		this.Data = Data;
 	}
-	public void setData(String Data){
-		this.Data=Data.getBytes();
+
+	public void setData(String Data) {
+		this.Data = Data.getBytes();
 	}
-	public String getDataAsString(){
+
+	public String getDataAsString() {
 		String str = "";
-		for(int i=0; i< Data.length; i++){
-			str+=(char)Data[i];
+		for (int i = 0; i < Data.length; i++) {
+			str += (char) Data[i];
 		}
 		return str;
 	}
@@ -47,34 +49,34 @@ public class ProxyEvent extends EventObject {
 		Direction = direction;
 	}
 
-
 	public Object getMtm() {
 		return mtm;
 	}
-	public boolean isTCPMtm(){
-		if(this.mtm.getClass().getName().contains("UDP"))
+
+	public boolean isTCPMtm() {
+		if (this.mtm.getClass().getName().contains("UDP"))
 			return false;
-		else 
+		else
 			return true;
 	}
-	
-	public GenericUDPMiTMServer getUDPMtm(){
-		return (GenericUDPMiTMServer)this.mtm;
+
+	public GenericUDPMiTMServer getUDPMtm() {
+		return (GenericUDPMiTMServer) this.mtm;
 	}
-	public GenericMiTMServer getTCPMtm(){
-		return (GenericMiTMServer)this.mtm;
+
+	public GenericMiTMServer getTCPMtm() {
+		return (GenericMiTMServer) this.mtm;
 	}
 
 	public void setMtm(Object mtm) {
 		this.mtm = mtm;
 	}
-	/*public GenericUDPMiTMServer getUDPMtm() {
-		return mtmUDP;
-	}
 
-	public void setUDPMtm(GenericUDPMiTMServer mtm) {
-		this.mtmUDP = mtm;
-	}*/
+	/*
+	 * public GenericUDPMiTMServer getUDPMtm() { return mtmUDP; }
+	 * 
+	 * public void setUDPMtm(GenericUDPMiTMServer mtm) { this.mtmUDP = mtm; }
+	 */
 
 	public int getSrcPort() {
 		return SrcPort;
@@ -115,12 +117,4 @@ public class ProxyEvent extends EventObject {
 	public void setOriginalData(byte[] originalData) {
 		OriginalData = originalData;
 	}
-	
-	
-	
-	
-	
-	
-	
-
 }

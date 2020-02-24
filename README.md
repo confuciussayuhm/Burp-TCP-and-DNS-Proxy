@@ -92,10 +92,10 @@ You can use the pre and post interceptors do all kinds of things with the stream
 
 ```
 def preIntercept(input,isC2S):
-    return input
-    
+	return input
+
 def postIntercept(input,isC2S):
-    return input
+	return input
 ```
 
 Below is an example of a server that is sending protobuf messages. Notice the stream would be difficult to modify by hand.
