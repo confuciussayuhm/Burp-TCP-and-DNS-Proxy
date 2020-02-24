@@ -2,9 +2,9 @@
 ![](http://imgur.com/X6xYsq8.png)
 
 ## Introduction
-This extension is to proxy and modify TCP and DNS traffic in Burp.
+This project is a Burp extension that can proxy and modify TCP and DNS traffic.
 
-This burp extension adds two new features to BurpSuite.
+This Burp extension adds two new features to BurpSuite.
  1.	A configurable DNS server. This will route all DNS requests to Burp or preconfigured hosts. It makes it easier to send mobile or thick client traffic to Burp. You need to create invisible proxy listeners in BurpSuite for the Burp to intercept HTTP traffic or you can use the second feature of this extension to intercept binary/non-http protocols.
  2.	A Non-HTTP MiTM Intercepting proxy. This extension allows you to create multiple listening ports that can MiTM server side services. It also uses Burp's CA cert so that if the browser or mobile device is already configured to access SSL/TLS requests using this cert then the encrypted binary protocols will be able to connect without generating errors too. It also provides the ability to automatically match and replace hex or strings as they pass through the proxy or you can use custom python code to manipulate the traffic.
  
@@ -42,15 +42,15 @@ This TCP proxy has several features built in.
 
 To perform normal intercepting of binary traffic of applications you can set the DNS IP address to the extension’s IP address and then create a Listener Under ‘Server Config’. This requires that you know the hostname and Port the application is trying to connect. You can switch to the ‘DNS History’ Tab to view the DNS queries and ports that are trying to connect to you. You could also run wireshark but Nope will filter this information for you. 
 
-Once you know the right host name and port you can configure these settings as shown above. If the service is using SSL then you need to export burp’s CA cert to the same folder that Burp is running out of for the extension to find it and generate certs that will pass certificate verification. Then you can check the SSL check box before adding the proxy. 
+Once you know the right host name and port you can configure these settings as shown above. If the service is using SSL then you need to export Burp’s CA cert to the same folder that Burp is running out of for the extension to find it and generate certs that will pass certificate verification. Then you can check the SSL check box before adding the proxy. 
 
 The proxy does not start until ‘enable’ is checked in the table.
 
-Once the proxy is started you can intercept it in real time. All your traffic will be logged into the TCP History Tab and stored locally in a sqlite database. The database can be exported or imported from the Server Configuration Tab. In addition, if Burp crashes or you close burp without saving the TCP History it will still be automatically loaded when you start Burp. 
+Once the proxy is started you can intercept it in real time. All your traffic will be logged into the TCP History Tab and stored locally in a sqlite database. The database can be exported or imported from the Server Configuration Tab. In addition, if Burp crashes or you close Burp without saving the TCP History it will still be automatically loaded when you start Burp. 
 
 ## Manual Intercept Traffic
 ![](http://imgur.com/X6xYsq8.png)
-Clicking on the TCP Intercept Tab will allow to enable and disable Manual Intercepting. This will be very similar to intercepting HTTP traffic with burp. If the data sent is just strings then it’s very simple to just replace text or attempt modification to the request. If the application is sending serialized objects or protobuffs then you will need to switch between Raw and Hex mode to ensure the data is encoded correctly and length checks are correct.
+Clicking on the TCP Intercept Tab will allow to enable and disable Manual Intercepting. This will be very similar to intercepting HTTP traffic with Burp. If the data sent is just strings then it’s very simple to just replace text or attempt modification to the request. If the application is sending serialized objects or protobuffs then you will need to switch between Raw and Hex mode to ensure the data is encoded correctly and length checks are correct.
 
 ## Automated Manipulation of Traffic
 Once you have your ideal payload you can automatically match and replace in the Automation Tab. 
@@ -100,12 +100,12 @@ def postIntercept(input,isC2S):
 
 Below is an example of a server that is sending protobuf messages. Notice the stream would be difficult to modify by hand.
 
-![](NonHTTPProxy/screenshots/PreFormat.PNG)
+![](TaDProxy/screenshots/PreFormat.PNG)
 
 Now we use the pre and post interceptor functions to make it easier to modify in transit. Notice the python console on the Right will display in 'print' statements as well as errors in your python code when it runs. *Note that if the functions fail the NoPE proxy will send the original paylaods and ignore any changes to the stream you made.*
 
-![](NonHTTPProxy/screenshots/PythonConsole.PNG)
+![](TaDProxy/screenshots/PythonConsole.PNG)
 
 Below is an example of the now Human Readable and Editable Protobufs.
 
-![](NonHTTPProxy/screenshots/Post%20Format.PNG)
+![](TaDProxy/screenshots/Post%20Format.PNG)
