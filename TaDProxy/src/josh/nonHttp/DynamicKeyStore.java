@@ -179,7 +179,7 @@ public class DynamicKeyStore {
 			newStore.setKeyEntry("key", (Key) intkeyPair.getPrivate(), "changeit".toCharArray(), chain);
 
 			String hidden = System.getProperty("user.home");
-			hidden += "/.NoPEProxy/keystores/";
+			hidden += "/.TaDProxy/keystores/";
 			File keyStoreDir = new File(hidden);
 			if (!keyStoreDir.exists()) {
 				keyStoreDir.mkdir();

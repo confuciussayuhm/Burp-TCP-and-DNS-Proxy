@@ -15,7 +15,7 @@ public class HibHelper {
 		// java.util.logging.Logger.getLogger("com.mchange").setLevel(java.util.logging.Level.OFF);
 		try {
 			String path = System.getProperty("user.home");
-			String resultFile = path + "/.NoPEProxy/requests.sqlite";
+			String resultFile = path + "/.TaDProxy/requests.sqlite";
 			String SQLString = "jdbc:sqlite:" + resultFile;
 			Configuration cfg = new Configuration();
 			Properties prop = new Properties();

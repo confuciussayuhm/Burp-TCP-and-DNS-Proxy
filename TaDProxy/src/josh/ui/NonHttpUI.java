@@ -1838,7 +1838,7 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 				// String fs = System.getProperty("file.separator");
 				// String resultFile = System.getProperty("user.dir") + fs +"requests.sqlite";
 				String path = System.getProperty("user.home");
-				String resultFile = path + "/.NoPEProxy/requests.sqlite";
+				String resultFile = path + "/.TaDProxy/requests.sqlite";
 				Frame fr = new Frame();
 				FileDialog fd = new FileDialog(fr, "Import Database", FileDialog.LOAD);
 				fd.setVisible(true);
@@ -2022,7 +2022,7 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 				// String fs = System.getProperty("file.separator");
 				// String file = System.getProperty("user.dir") + fs +"requests.sqlite";
 				String path = System.getProperty("user.home");
-				String file = path + "/.NoPEProxy/requests.sqlite";
+				String file = path + "/.TaDProxy/requests.sqlite";
 				Frame fr = new Frame();
 				FileDialog fd = new FileDialog(fr, "Export File", FileDialog.SAVE);
 				fd.setVisible(true);
@@ -2268,7 +2268,7 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 		 * System.getProperty("user.dir") + fs + "hosts.txt";
 		 */
 		String path = System.getProperty("user.home");
-		String file = path + "/.NoPEProxy/hosts.txt";
+		String file = path + "/.TaDProxy/hosts.txt";
 		File f = new File(file);
 		if (!f.exists()) {
 			Callbacks.printOutput("missing hosts.txt.. creating it.");
@@ -2295,7 +2295,7 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 		// String fs = System.getProperty("file.separator");
 		// String file = System.getProperty("user.dir") + fs + "hosts.txt";
 		String path = System.getProperty("user.home");
-		String file = path + "/.NoPEProxy/hosts.txt";
+		String file = path + "/.TaDProxy/hosts.txt";
 		File f = new File(file);
 		if (!f.exists()) {
 			return "";
@@ -2322,7 +2322,7 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 		// String fs = System.getProperty("file.separator");
 		// String file = System.getProperty("user.dir") + fs + "nonHTTPmatch.txt";
 		String path = System.getProperty("user.home");
-		String file = path + "/.NoPEProxy/nonHTTPmatch.txt";
+		String file = path + "/.TaDProxy/nonHTTPmatch.txt";
 		File f = new File(file);
 		if (!f.exists()) {
 			Callbacks.printOutput("missing nonHTTPsmatch.txt.. creating it.");
@@ -2371,7 +2371,7 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 		// String fs = System.getProperty("file.separator");
 		// String file = System.getProperty("user.dir") + fs + "nonHTTPmatch.txt";
 		String path = System.getProperty("user.home");
-		String file = path + "/.NoPEProxy/nonHTTPmatch.txt";
+		String file = path + "/.TaDProxy/nonHTTPmatch.txt";
 		File f = new File(file);
 		if (!f.exists()) {
 			try {
@@ -2431,12 +2431,12 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 		try {
 			// config.load(ClassLoader.getSystemResourceAsStream("dns.properties"));
 			String path = System.getProperty("user.home");
-			File f = new File(path + "/.NoPEProxy/dns.properties");
+			File f = new File(path + "/.TaDProxy/dns.properties");
 			if (f.exists()) {
 				config.load(new FileInputStream(f));
 			} else {
 				// config.load(ClassLoader.getSystemResourceAsStream("dns.properties"));
-				File p = new File(path + "/.NoPEProxy");
+				File p = new File(path + "/.TaDProxy");
 				if (!p.exists())
 					p.mkdir();
 				f.createNewFile();
@@ -2462,12 +2462,12 @@ public class NonHttpUI extends JPanel implements ProxyEventListener, DNSTableEve
 		try {
 			// config.load(ClassLoader.getSystemResourceAsStream("dns.properties"));
 			String path = System.getProperty("user.home");
-			File f = new File(path + "/.NoPEProxy/dns.properties");
+			File f = new File(path + "/.TaDProxy/dns.properties");
 			if (f.exists()) {
 				config.load(new FileInputStream(f));
 			} else {
 				// config.load(ClassLoader.getSystemResourceAsStream("dns.properties"));
-				File p = new File(path + "/.NoPEProxy");
+				File p = new File(path + "/.TaDProxy");
 				if (!p.exists())
 					p.mkdir();
 				f.createNewFile();

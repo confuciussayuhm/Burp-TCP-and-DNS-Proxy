@@ -492,7 +492,7 @@ public class SendData implements Runnable {
 		 * System.getProperty("user.dir") + fs + "nonHTTPmatch.txt";
 		 */
 		String path = System.getProperty("user.home");
-		String file = path + "/.NoPEProxy/nonHTTPmatch.txt";
+		String file = path + "/.TaDProxy/nonHTTPmatch.txt";
 		File f = new File(file);
 		if (!f.exists()) {
 			System.out.println("missing nonHTTPmatch.txt");

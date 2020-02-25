@@ -50,13 +50,13 @@ public class UDPListener implements Runnable {
 	private static void updateInterface() {
 		String path = System.getProperty("user.home");
 
-		File f = new File(path + "/.NoPEProxy/dns.properties");
+		File f = new File(path + "/.TaDProxy/dns.properties");
 		Properties config = new Properties();
 		try {
 			if (f.exists()) {
 				config.load(new FileInputStream(f));
 			} else {
-				File p = new File(path + "/.NoPEProxy/");
+				File p = new File(path + "/.TaDProxy/");
 
 				if (!p.exists())
 					p.mkdir();
@@ -75,13 +75,13 @@ public class UDPListener implements Runnable {
 
 	private static void updateInterface(String iface) {
 		String path = System.getProperty("user.home");
-		File f = new File(path + "/.NoPEProxy/dns.properties");
+		File f = new File(path + "/.TaDProxy/dns.properties");
 		Properties config = new Properties();
 		try {
 			if (f.exists()) {
 				config.load(new FileInputStream(f));
 			} else {
-				File p = new File(path + "/.NoPEProxy/");
+				File p = new File(path + "/.TaDProxy/");
 
 				if (!p.exists())
 					p.mkdir();
@@ -296,8 +296,7 @@ public class UDPListener implements Runnable {
 							dnsResp[i++] = octs[1];
 							dnsResp[i++] = octs[2];
 							dnsResp[i++] = octs[3];
-							returnIP = (octs[0] & 0xFF) + "." + (octs[1] & 0xFF) + "." + (octs[2] & 0xFF) + "."
-									+ (octs[3] & 0xFF);
+							returnIP = (octs[0] & 0xFF) + "." + (octs[1] & 0xFF) + "." + (octs[2] & 0xFF) + "." + (octs[3] & 0xFF);
 							found = true;
 							break;
 						}
@@ -350,7 +349,7 @@ public class UDPListener implements Runnable {
 
 	private List<String> readHosts() {
 		String path = System.getProperty("user.home");
-		String file = path + "/.NoPEProxy/hosts.txt";
+		String file = path + "/.TaDProxy/hosts.txt";
 		File f = new File(file);
 		/*
 		 * String fs = System.getProperty("file.separator"); String file =

@@ -82,7 +82,7 @@ public class PythonMangler {
 		// String fs = System.getProperty("file.separator");
 		// String file = System.getProperty("user.dir") + fs +"mangler.py";
 		String path = System.getProperty("user.home");
-		String file = path + "/.NoPEProxy/mangler.py";
+		String file = path + "/.TaDProxy/mangler.py";
 		/*
 		 * Properties props = new Properties();
 		 * System.out.println(System.getProperty("python.path"));
@@ -149,7 +149,7 @@ public class PythonMangler {
 		// String fs = System.getProperty("file.separator");
 		// String file = System.getProperty("user.dir") + fs + "mangler.py";
 		String path = System.getProperty("user.home");
-		String file = path + "/.NoPEProxy/mangler.py";
+		String file = path + "/.TaDProxy/mangler.py";
 		File f = new File(file);
 		this.pyCode = code;
 		if (pyCode.trim().equals("")) {

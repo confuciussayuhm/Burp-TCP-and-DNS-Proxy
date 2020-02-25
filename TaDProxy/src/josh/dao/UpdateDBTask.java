@@ -84,7 +84,7 @@ public class UpdateDBTask extends TimerTask {
 			PreparedStatement stmt = null;
 			try {
 				Class.forName("org.sqlite.JDBC");
-				c = DriverManager.getConnection("jdbc:sqlite:C:/Users/Josh/.NopeProxy/requests.sqlite");
+				c = DriverManager.getConnection("jdbc:sqlite:C:/Users/Josh/.TaDProxy/requests.sqlite");
 			} catch (Exception e) {
 				System.err.println(e.getClass().getName() + ": " + e.getMessage());
 				System.exit(0);
